@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib import admin
 
 
 class User(models.Model):
@@ -9,10 +10,13 @@ class User(models.Model):
         return self.email
 
 
-class Products(models.Model):
-    product_id = models.IntegerField(max_length=10)
+class Product(models.Model):
+    product_id = models.IntegerField()
     link = models.CharField(max_length=255)
-    price = models.IntegerField(max_length=255)
+    price = models.IntegerField()
+
+    def __str__(self):
+        return self.link
 
 
 class Order(models.Model):
@@ -22,7 +26,7 @@ class Order(models.Model):
     )
 
     product_id = models.ForeignKey(
-        "Products",
+        "Product",
         on_delete=models.CASCADE
     )
 
@@ -36,9 +40,15 @@ class Purchase(models.Model):
         on_delete=models.CASCADE,
     )
 
+    purchase_id = models.CharField(max_length=255, default="none")
+
     product_id = models.ForeignKey(
-        "Products",
+        "Product",
         on_delete=models.CASCADE
     )
 
     status = models.CharField(max_length=255)
+
+
+class Admin(admin.ModelAdmin):
+    login_required = True
