@@ -10,8 +10,8 @@ class User(models.Model):
         return self.email
 
 
-class Product(models.Model):
-    product_id = models.IntegerField()
+class Link(models.Model):
+    link_id = models.IntegerField()
     link = models.CharField(max_length=255)
     price = models.IntegerField()
 
@@ -25,8 +25,8 @@ class Order(models.Model):
         on_delete=models.CASCADE,
     )
 
-    product_id = models.ForeignKey(
-        "Product",
+    link_id = models.ForeignKey(
+        "Link",
         on_delete=models.CASCADE
     )
 
@@ -42,8 +42,8 @@ class Purchase(models.Model):
 
     purchase_id = models.CharField(max_length=255, default="none")
 
-    product_id = models.ForeignKey(
-        "Product",
+    link_id = models.ForeignKey(
+        "Link",
         on_delete=models.CASCADE
     )
 
