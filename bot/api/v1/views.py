@@ -14,8 +14,8 @@ def post_list(request):
         serializer = LinkSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            print("Link saved successfully")  # Add this line for debugging
+            print("Link saved successfully")
             return Response(serializer.data)
         else:
-            print("Serializer errors:", serializer.errors)  # Add this line for debugging
+            print("Serializer errors:", serializer.errors)
             return Response(serializer.errors)
