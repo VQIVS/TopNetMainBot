@@ -2,21 +2,22 @@ from django.db import models
 from django.contrib import admin
 
 
+class Link(models.Model):
+    link_id = models.IntegerField()
+    link = models.CharField(max_length=255)
+    price = models.IntegerField()
+    status = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.link
+
+
 # class User(models.Model):
 #     user_id = models.CharField(max_length=255)
 #     email = models.EmailField(max_length=255)
 #
 #     def __str__(self):
 #         return self.email
-
-
-class Link(models.Model):
-    link_id = models.IntegerField()
-    link = models.CharField(max_length=255)
-    price = models.IntegerField()
-
-    def __str__(self):
-        return self.link
 
 
 # class Order(models.Model):
