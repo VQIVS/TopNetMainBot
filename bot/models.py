@@ -12,42 +12,42 @@ class Link(models.Model):
         return self.link
 
 
-# class User(models.Model):
-#     user_id = models.CharField(max_length=255)
-#     email = models.EmailField(max_length=255)
-#
-#     def __str__(self):
-#         return self.email
+class User(models.Model):
+    user_id = models.CharField(max_length=255)
+    email = models.EmailField(max_length=255)
+
+    def __str__(self):
+        return self.email
 
 
-# class Order(models.Model):
-#     user_id = models.ForeignKey(
-#         "User",
-#         on_delete=models.CASCADE,
-#     )
-#
-#     link_id = models.ForeignKey(
-#         "Link",
-#         on_delete=models.CASCADE
-#     )
-#
-#     status = models.CharField(max_length=255)
-#     quantity = models.IntegerField()
-#
-#
-# class Purchase(models.Model):
-#     user_id = models.ForeignKey(
-#         "User",
-#         on_delete=models.CASCADE,
-#     )
-#
-#     purchase_id = models.CharField(max_length=255, default="none")
-#
-#     link_id = models.ForeignKey(
-#         "Link",
-#         on_delete=models.CASCADE
-#     )
-#
+class Order(models.Model):
+    user_id = models.ForeignKey(
+        "User",
+        on_delete=models.CASCADE,
+    )
+
+    link_id = models.ForeignKey(
+        "Link",
+        on_delete=models.CASCADE
+    )
+
+    status = models.CharField(max_length=255)
+    quantity = models.IntegerField()
+
+
+class Purchase(models.Model):
+    user_id = models.ForeignKey(
+        "User",
+        on_delete=models.CASCADE,
+    )
+
+    purchase_id = models.CharField(max_length=255, default="none")
+
+    link_id = models.ForeignKey(
+        "Link",
+        on_delete=models.CASCADE
+    )
+
 #     status = models.CharField(max_length=255)
 
 
