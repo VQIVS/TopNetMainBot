@@ -1,5 +1,6 @@
 from telebot import TeleBot
 from bot.keyboards import keyboard, products_keyboard
+from bot.models import User
 bot = TeleBot("6635901215:AAEH1u7uqzShEDAm6wBvz1XzsfuD0U69rxs")
 
 @bot.message_handler(['start'])
@@ -32,9 +33,9 @@ product_ids = {
 def invoice(query):
     user_id = query.message.chat.id
     bot.send_message(user_id, 'لطفا یک ایمیل موجود ارسال کنید')
-    # user_text = query.text
-    # user_input = User(user_id=user_id, email=user_text)
-    # user_input.save()
+    user_text = query.text
+    user_input = User(user_id=user_id, email=user_text)
+    user_input.save()
     bot.send_message(user_id, 'دریافت شد')
 
 
