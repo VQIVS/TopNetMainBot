@@ -6,11 +6,11 @@ import django
 from django.db import transaction, DatabaseError
 from django.http import HttpResponse
 import requests
+import re
 
 api_key = "930014174178211766447672"
 recipient_wallet = "recipient_wallet_address"
 api_endpoint = 'https://mrswap.org/wallp/custom.php'
-
 
 products_prices = {
     "product_1": 100,
@@ -47,10 +47,10 @@ def support(message):
 
 
 product_ids = {
-    '⚪️ نقره‌ای 1 : یک ماهه 25GB': 1,
-    '⚪️ نقره‌ای 2 : یک ماهه 50GB': 2,
-    '⚪️ نقره‌ای 3 : یک ماهه 75GB': 3,
-    '🟡 طلایی 4 : یک ماهه 100GB': 4
+    'product_1': 1,
+    'product_2': 1,
+    'product_3': 1,
+    'product_4': 1,
 }
 
 
@@ -75,7 +75,12 @@ def handler(query):
     pass
 
 
-@bot.message_handler(func=lambda message: True)
+def is_valid_email(email):
+    email_pattern = r'^[\w\.-]+@[\w\.-]+\.\w+$'
+    return re.match(email_pattern, email)
+
+
+@bot.message_handler(func=lambda message: is_valid_email(message.text))
 def handler(message):
     user_id = message.chat.id
     email = message.text
@@ -83,13 +88,13 @@ def handler(message):
         email = User(user_id=user_id, email=email)
         with transaction.atomic():
             email.save()
-            message_save = f'کاربر  {email}ثبت شد'
+            message_save = f'کاربر {email} ثبت شد'
             message_pay = "برای پرداخت دکمه پایین رو لمس کنید"
             bot.send_message(user_id, message_save)
             bot.send_message(user_id, message_pay, reply_markup=payment_keyboard)
     except DatabaseError:
         message_unsaved = "ایمیل یا نام کاربری تکراری یا نامعتبر است لطفا محصول را دوباره انتخاب کرده و ایمیل یا نام " \
-                          "کاربری معتبر وارد کنید(حتما با حروف لاتین باشد)"
+                          "کاربری معتبر وارد کنید (حتما با حروف لاتین باشد)"
         bot.send_message(user_id, message_unsaved)
         return HttpResponse(Exception)
 
@@ -111,5 +116,3 @@ def handle_product_selection(query):
 
     response = requests.post(api_endpoint, data=data)
     print("response")
-
-
