@@ -188,7 +188,7 @@ def confirmation(message):
 
     bot.reply_to(message, messageـbox)
 
-    admin_channel_id = "-1001951490996"
+    admin_channel_id = "--1001926293606"
     with open(local_photo_path, 'rb') as photo_to_send:
         bot.send_photo(admin_channel_id, photo_to_send, caption=f"User {user_id} Payment Confirmation")
 
