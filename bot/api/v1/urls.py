@@ -1,5 +1,4 @@
 from django.urls import path, include
-from .views import ModelViewSetLinks, ModelViewSetUser
 from .views import ModelViewSetLinks, ModelViewSetUser, ModelViewSetOrder, ModelViewSetEmail
 from rest_framework.routers import DefaultRouter
 
