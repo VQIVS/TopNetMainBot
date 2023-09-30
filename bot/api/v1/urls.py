@@ -12,6 +12,5 @@ router.register('Emails', ModelViewSetEmail, basename="Emails-api")
 app_name = "api-v1"
 
 urlpatterns = [
-    # path('post_list/', post_list, name='post_list')
     path('', include(router.urls))
 ]
