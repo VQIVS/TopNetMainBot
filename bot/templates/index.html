@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Link Input Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            background-color: #007bff;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        form {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        select, input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #result {
+            text-align: center;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Add Links</h1>
+    <form id="link-form">
+        {% csrf_token %}
+        <label for="link_id">Link ID:</label>
+        <select id="link_id" name="link_id">
+             <option value="1">id:1</option>
+            <option value="2">id:2</option>
+            <option value="3">id:3</option>
+            <option value="4">id:4</option>
+            <option value="5">id:5</option>
+            <option value="6">id:6</option>
+        </select>
+        <label for="price">Price:</label>
+        <select id="price" name="price">
+            <option value="19">19 trx</option>
+            <option value="29">29 trx</option>
+            <option value="34">34 trx</option>
+            <option value="38">38 trx</option>
+            <option value="43">43 trx</option>
+            <option value="48">48 trx</option>
+        </select>
+        <label for="link">Links (comma-separated):</label>
+        <textarea id="link" name="link" rows="4" cols="50"></textarea>
+        <button type="submit">Submit</button>
+    </form>
+    <div id="result"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const linkForm = document.getElementById('link-form');
+            const resultDiv = document.getElementById('result');
+
+            linkForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const link_id = document.getElementById('link_id').value;
+                const price = document.getElementById('price').value;
+                const linkInput = document.getElementById('link').value;
+
+                // Split the comma-separated links into an array
+                const linksArray = linkInput.split(',');
+
+                // Check if link is a valid string
+                if (linksArray.some(link => !link || typeof link !== 'string')) {
+                    resultDiv.innerHTML = 'Invalid link(s). Please enter valid strings.';
+                    return;
+                }
+
+                const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+                // Loop through the links and send them one by one
+                linksArray.forEach(link => {
+                    const postData = {
+                        link_id: link_id,
+                        price: price,
+                        link: link // Use the 'link' input value
+                    };
+
+                    fetch('/api/v1/links/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRFToken': csrfToken,
+                        },
+                        body: JSON.stringify(postData),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        resultDiv.innerHTML = 'Links added successfully!';
+                    })
+                    .catch(error => {
+                        resultDiv.innerHTML = 'Error adding links.';
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
