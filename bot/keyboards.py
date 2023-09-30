@@ -6,25 +6,16 @@ buttons_row1 = [
     types.KeyboardButton('⭐️خرید سرویس'),
 ]
 buttons_row2 = [
-    types.KeyboardButton('لینک اتصال 🔗'),
     types.KeyboardButton('💬پشتیبانی'),
+    types.KeyboardButton('📚راهنما اتصال'),
 
 ]
 buttons_row3 = [
-    types.KeyboardButton('📚راهنما اتصال'),
     types.KeyboardButton('اضافه کردن ایمیل'),
-]
-buttons_row4 = [
-    types.KeyboardButton('🛍 خرید عمده'),
 ]
 keyboard.add(*buttons_row1)
 keyboard.add(*buttons_row2)
 keyboard.add(*buttons_row3)
-keyboard.add(*buttons_row4)
-
-# FAQZ_keyboard = types.InlineKeyboardMarkup(row_width=1)
-# button = types.InlineKeyboardButton("تایید", callback_data="تایید")
-# FAQZ_keyboard.add(button)
 
 products_keyboard = types.InlineKeyboardMarkup(row_width=1)
 product_1 = types.InlineKeyboardButton('1 کاربر |📆 مدت: 30 روز |‌🔵 25 گیگابایت |‌ 79 هزار تومان (19ترون)', callback_data='⭐️ گروه SILVER')
