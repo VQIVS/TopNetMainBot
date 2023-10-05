@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Links with Status True</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        h1 {
+            background-color: #007BFF;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-top: 20px;
+            color: #333;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        li:before {
+            content: "\2022";
+            color: #007BFF;
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            position: absolute;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Links with Status True and Link IDs 1 to 6</h1>
+
+        <h2>Link ID 1:</h2>
+        <ul>
+            {% for link in links_by_link_id_1 %}
+                <li>{{ link.link }} - Price: ${{ link.price }}</li>
+            {% endfor %}
+        </ul>
+
+        <h2>Link ID 2:</h2>
+        <ul>
+            {% for link in links_by_link_id_2 %}
+                <li>{{ link.link }} - Price: ${{ link.price }}</li>
+            {% endfor %}
+        </ul>
+
+        <h2>Link ID 3:</h2>
+        <ul>
+            {% for link in links_by_link_id_3 %}
+                <li>{{ link.link }} - Price: ${{ link.price }}</li>
+            {% endfor %}
+        </ul>
+
+        <h2>Link ID 4:</h2>
+        <ul>
+            {% for link in links_by_link_id_4 %}
+                <li>{{ link.link }} - Price: ${{ link.price }}</li>
+            {% endfor %}
+        </ul>
+
+        <h2>Link ID 5:</h2>
+        <ul>
+            {% for link in links_by_link_id_5 %}
+                <li>{{ link.link }} - Price: ${{ link.price }}</li>
+            {% endfor %}
+        </ul>
+
+        <h2>Link ID 6:</h2>
+        <ul>
+            {% for link in links_by_link_id_6 %}
+                <li>{{ link.link }} - Price: ${{ link.price }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
