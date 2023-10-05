@@ -205,10 +205,11 @@ def handle_channel_post(message):
         user_id = extract_user_id_from_caption(message.reply_to_message.caption)
         print(user_id)
         print(type(user_id))
-        order = Order.objects.filter(username=user_id).first()
+        order = Order.objects.filter(username=user_id).last()
         print(order)
         if order:
             link_id = order.link_id
+            print("link_id", link_id)
             link = Link.objects.filter(link_id=link_id, status=True).first()
             if link:
                 message_link = f"💡با لینک زیر میتونین به سرویس هاتون دسترسی پیدا کنید:\n{link.link}\n\nاز طریق « " \
