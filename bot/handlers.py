@@ -220,6 +220,8 @@ def handle_channel_post(message):
                                f"در صورت فقدان لینک, به پشتیبانی پیام بدین.)"
                 link.status = False
                 link.save()
+                order.status = "Confirmed"
+                order.save()
                 bot.send_message(user_id, message_link)
             else:
                 bot.send_message(user_id, "No valid link found for your order.")
