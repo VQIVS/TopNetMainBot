@@ -151,7 +151,7 @@ def handler(message):
         bot.send_message(user_id, message_unsaved)
 
 
-@bot.message_handler(func=lambda query: query.data == "pay_card")
+@bot.message_handler(func=lambda query: query.data == "pay_cart")
 def pay_with_card(query):
     user_id = query.message.chat.id
     message_text = """ ❗️عزیزان دقت کنید در صورتی که موقع پرداخت شرح تراکنش نیاز باشد، اگر اشاره ای به خرید VPN انجام بدید، به هیچ عنوان سروری برای شما ارسال نمیشود.
