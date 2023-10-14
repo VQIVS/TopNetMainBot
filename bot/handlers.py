@@ -7,12 +7,12 @@ from django.db import DatabaseError
 import re
 
 products_ids = {
-    '⭐️ گروه SILVER': {"link_id": 1, "price": 17},
-    '⭐️ گروه GOLD-1': {"link_id": 2, "price": 26},
-    '⭐️ گروه GOLD-2': {"link_id": 3, "price": 31},
-    '⭐️ گروه PLATINUM-1': {"link_id": 4, "price": 35},
-    '⭐️ گروه PLATINUM-2': {"link_id": 5, "price": 44},
-    '⭐️ گروه DIAMOND': {"link_id": 6, "price": 66},
+    '⭐️ گروه SILVER': {"link_id": 1, "price": 79},
+    '⭐️ گروه GOLD-1': {"link_id": 2, "price": 119},
+    '⭐️ گروه GOLD-2': {"link_id": 3, "price": 139},
+    '⭐️ گروه PLATINUM-1': {"link_id": 4, "price": 159},
+    '⭐️ گروه PLATINUM-2': {"link_id": 5, "price": 199},
+    '⭐️ گروه DIAMOND': {"link_id": 6, "price": 299},
 }
 
 bot = TeleBot("6635901215:AAEH1u7uqzShEDAm6wBvz1XzsfuD0U69rxs")
@@ -119,7 +119,6 @@ def invoice(query):
                       f"قیمت محصول به ترون: {selected_product['price']}\n\n" \
                       f"وضعیت سفارش: {order.status}\n\n" \
                       f"تعداد: {order.quantity}\n\n" \
-                      f"قیمت به ارز ترون است"
 
     bot.send_message(user_id, invoice_message, reply_markup=ConfirmOrder_keyboard)
 
@@ -152,25 +151,36 @@ def handler(message):
         bot.send_message(user_id, message_unsaved)
 
 
-@bot.message_handler(func=lambda query: query.data == "پرداخت")
-def payment_handler(query):
-    pass
+@bot.message_handler(func=lambda query: query.data == "pay_card")
+def pay_with_card(query):
+    user_id = query.message.chat.id
+    message_text = """ ❗️عزیزان دقت کنید در صورتی که موقع پرداخت شرح تراکنش نیاز باشد، اگر اشاره ای به خرید VPN انجام بدید، به هیچ عنوان سروری برای شما ارسال نمیشود.
+
+جهت پرداخت از طریق کارت زیر به نام 
+محمد مهدی تحویلیان اقدام کنید:
+
+6104337659461683
+
+✅سپس در بات رسید کامل واریز را در بات  ارسال کنید."""
+    bot.send_message(user_id, message_text)
 
 
 @bot.callback_query_handler(func=lambda query: query.data == "بله")
 def payment_callback(query):
     user_id = query.message.chat.id
-    text = """ارز مورد نظر حتما ترون انتخاب شود
-آدرس دریافتی: 
-TVmk4D6nWWG7Vw2gGKEtu7Sh4NpJ5PaSPQ
- در مرحله مقدر ترون، لطفا مقدار ترون اعلام شده توسط ربات را وارد نمایید.
+#     text = """ارز مورد نظر حتما ترون انتخاب شود
+# آدرس دریافتی:
+# TVmk4D6nWWG7Vw2gGKEtu7Sh4NpJ5PaSPQ
+#  در مرحله مقدر ترون، لطفا مقدار ترون اعلام شده توسط ربات را وارد نمایید.
+#
+# ✅در صورتی که خودتان درگاه ارز دیجیتال یا کیف پول میشناسید و استفاده میکنید، میتوانید با استفاده از آن کیف پول واریز نمایید.
+# در غیر این صورت روی گزینه پرداخت کلیک کنید.
+#
+# 🟢️️️️️️پس از پرداخت اسکرین شات رسید خود را داخل بات بفرستید و منتظر باشید تا لینک شما ارسال شود(۵دقیقه تا ۱ ساعت)
+#
+# @top_netvpn 🔥"""
 
-✅در صورتی که خودتان درگاه ارز دیجیتال یا کیف پول میشناسید و استفاده میکنید، میتوانید با استفاده از آن کیف پول واریز نمایید.
-در غیر این صورت روی گزینه پرداخت کلیک کنید.
-
-🟢️️️️️️پس از پرداخت اسکرین شات رسید خود را داخل بات بفرستید و منتظر باشید تا لینک شما ارسال شود(۵دقیقه تا ۱ ساعت)
-
-@top_netvpn 🔥"""
+    text = """لطفا نحوه پرداخت خود را مشخص کنید."""
     bot.send_message(user_id, text, reply_markup=payment_keyboard)
 
 
@@ -178,7 +188,8 @@ TVmk4D6nWWG7Vw2gGKEtu7Sh4NpJ5PaSPQ
 def confirmation(message):
     user_id = message.from_user.id
     messageـbox = "رسید شما دریافت شد.\nمنتظر بمونید تا پرداخت شما تایید بشه :)\nممنون از صبوریتون."
-
+    order = Order.objects.filter(username=user_id).last()
+    link_id = order.link_id
     save_directory = "bot/receipts/img"
     photo = message.photo[-1]
     file_id = photo.file_id
@@ -196,8 +207,7 @@ def confirmation(message):
 
     admin_channel_id = "-1001926293606"
     with open(local_photo_path, 'rb') as photo_to_send:
-        bot.send_photo(admin_channel_id, photo_to_send, caption=f"User {user_id} Payment Confirmation")
-
+        bot.send_photo(admin_channel_id, photo_to_send, caption=f"User {user_id} Payment Confirmation for product {link_id}")
 
 def extract_user_id_from_caption(caption):
     parts = [part.strip() for part in caption.split(' ')]
@@ -229,7 +239,6 @@ def handle_channel_post(message):
                 🔴دقت کنید این لینک یک بار برای شما ارسال میشود لطفا لینک را در جای امنی ذخیره کنید(در صورت فقدان لینک, به پشتیبانی پیام بدین.)
                 
                 """
-
                 link.status = False
                 link.save()
                 order.status = "Confirmed"
