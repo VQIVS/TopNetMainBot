@@ -116,7 +116,7 @@ def invoice(query):
     invoice_message = f"فاکتور شما: {selected_option}\n\n" \
                       f"کد کاربری: {user.user_id}\n\n" \
                       f"ایمیل: {selected_email.address}\n\n" \
-                      f"قیمت محصول به ترون: {selected_product['price']}\n\n" \
+                      f"قیمت محصول به تومان: {selected_product['price']}\n\n" \
                       f"وضعیت سفارش: {order.status}\n\n" \
                       f"تعداد: {order.quantity}\n\n" \
 
