@@ -27,7 +27,7 @@ DEBUG = False
 # DEBUG = False
 
 
-ALLOWED_HOSTS = ['5.255.119.199']
+ALLOWED_HOSTS = ['109.61.95.59']
 # ALLOWED_HOSTS = ['*']
 
 
