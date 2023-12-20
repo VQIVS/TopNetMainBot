@@ -6,6 +6,7 @@ import django
 from django.db import DatabaseError
 import re
 
+
 products_ids = {
     '⭐️ گروه SILVER': {"link_id": 1, "price": 79},
     '⭐️ گروه GOLD-1': {"link_id": 2, "price": 119},
@@ -205,7 +206,7 @@ def confirmation(message):
 
     bot.reply_to(message, messageـbox)
 
-    admin_channel_id = "-1001926293606"
+    admin_channel_id = "-1002034267204"
     with open(local_photo_path, 'rb') as photo_to_send:
         bot.send_photo(admin_channel_id, photo_to_send, caption=f"User {user_id} Payment Confirmation for product {link_id}")
 
@@ -234,7 +235,7 @@ def handle_channel_post(message):
                 {link}
                 ❎لطفا دقت کنید اسم کانفیگ اول اشتراکتون بعد از هر بار آپدیت اشتراکتون، حجم و زمان باقیماندتون رو نمایش میدهد.
                 
-                🟦برای رفع مشکل اتصال، لطفا هرروز اشتراک خود را مطابق این پست آپدیت کنید: https://t.me/AZUREWebVPN/23
+                    🟦برای رفع مشکل اتصال، لطفا هرروز اشتراک خود را مطابق این پست آپدیت کنید: https://t.me/top_netvpn/68
                 
                 🔴دقت کنید این لینک یک بار برای شما ارسال میشود لطفا لینک را در جای امنی ذخیره کنید(در صورت فقدان لینک, به پشتیبانی پیام بدین.)
                 
