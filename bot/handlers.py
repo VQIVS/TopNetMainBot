@@ -6,17 +6,17 @@ import django
 from django.db import DatabaseError
 import re
 
-
 products_ids = {
-    '⭐️ گروه SILVER': {"link_id": 1, "price": 79},
-    '⭐️ گروه GOLD-1': {"link_id": 2, "price": 119},
-    '⭐️ گروه GOLD-2': {"link_id": 3, "price": 139},
-    '⭐️ گروه PLATINUM-1': {"link_id": 4, "price": 159},
-    '⭐️ گروه PLATINUM-2': {"link_id": 5, "price": 199},
-    '⭐️ گروه DIAMOND': {"link_id": 6, "price": 299},
+    '⭐️ گروه SILVER': {"link_id": 1, "price": 24},
+    '⭐️ گروه GOLD-1': {"link_id": 2, "price": 48},
+    '⭐️ گروه GOLD-2': {"link_id": 3, "price": 72},
 }
+# '⭐️ گروه PLATINUM-2' : {"link_id": 5, "price": 179},
+# '⭐️ گروه DIAMOND': {"link_id": 6, "price": 199},
+# '⭐️ گروه PLATINUM-1': {"link_id": 4, "price": 159},
 
-bot = TeleBot("6635901215:AAEH1u7uqzShEDAm6wBvz1XzsfuD0U69rxs")
+
+bot = TeleBot("6265375073:AAFVb46E6EGkcp5AqcyORKiswf7SSel-rlg")
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "core.settings")
 
@@ -46,7 +46,8 @@ def add_email(message):
 @bot.message_handler(func=lambda message: message.text == '⭐️خرید سرویس')
 def buy(message):
     user_id = message.from_user.id
-    message_buy = "🛒 لطفاً یکی از پلن های زیر را برای خرید انتخاب کنید."
+    message_buy = """🛒 لطفاً یکی از پلن های زیر را برای خرید انتخاب کنید.
+    (اشتراک ها محدودیتی برای تعداد کاربر ندارند.)"""
     bot.send_message(user_id, message_buy, reply_markup=products_keyboard)
 
 
@@ -63,11 +64,19 @@ def support(message):
 @bot.message_handler(func=lambda message: message.text == "📚راهنما اتصال")
 def how_to_connect(message):
     user_id = message.from_user.id
-    text ="""🟦لطفا هرروز اشتراک خود را مطابق این پست آپدیت کنید: https://t.me/AZUREWebVPN/23
+    text = """🟦لطفا هرروز اشتراک خود را مطابق این پست آپدیت کنید: https://t.me/AZUREWebVPN/23
 ✅برای دانلود نرم افزار، راهنمای وارد کردن لینک و اتصال، مطالب کانال زیر را مشاهده کنید: @RahnamaAZUREWeb
 ❎لطفا دقت کنید اسم کانفیگ آخر اشتراکتون بعد از هر بار آپدیت اشتراکتون، حجم و زمان باقیماندتون رو نمایش میدهد.
     """
     bot.send_message(user_id, text)
+
+
+@bot.message_handler(func=lambda message: message.text == "درخواست حجم سفارشی")
+def message_chat(message):
+    user_id = message.from_user.id
+    text = """ برای درخواست ججم دلخواهتان به پشتیبانی پیام دهید:)"""
+    bot.send_message(user_id, text)
+
 
 @bot.callback_query_handler(func=lambda query: query.data in products_ids)
 def select_email(query):
@@ -120,7 +129,7 @@ def invoice(query):
                       f"قیمت محصول به تومان: {selected_product['price']}\n\n" \
                       f"وضعیت سفارش: {order.status}\n\n" \
                       f"تعداد: {order.quantity}\n\n" \
-
+ \
     bot.send_message(user_id, invoice_message, reply_markup=ConfirmOrder_keyboard)
 
 
@@ -169,17 +178,17 @@ def pay_with_card(query):
 @bot.callback_query_handler(func=lambda query: query.data == "بله")
 def payment_callback(query):
     user_id = query.message.chat.id
-#     text = """ارز مورد نظر حتما ترون انتخاب شود
-# آدرس دریافتی:
-# TVmk4D6nWWG7Vw2gGKEtu7Sh4NpJ5PaSPQ
-#  در مرحله مقدر ترون، لطفا مقدار ترون اعلام شده توسط ربات را وارد نمایید.
-#
-# ✅در صورتی که خودتان درگاه ارز دیجیتال یا کیف پول میشناسید و استفاده میکنید، میتوانید با استفاده از آن کیف پول واریز نمایید.
-# در غیر این صورت روی گزینه پرداخت کلیک کنید.
-#
-# 🟢️️️️️️پس از پرداخت اسکرین شات رسید خود را داخل بات بفرستید و منتظر باشید تا لینک شما ارسال شود(۵دقیقه تا ۱ ساعت)
-#
-# @top_netvpn 🔥"""
+    #     text = """ارز مورد نظر حتما ترون انتخاب شود
+    # آدرس دریافتی:
+    # TVmk4D6nWWG7Vw2gGKEtu7Sh4NpJ5PaSPQ
+    #  در مرحله مقدر ترون، لطفا مقدار ترون اعلام شده توسط ربات را وارد نمایید.
+    #
+    # ✅در صورتی که خودتان درگاه ارز دیجیتال یا کیف پول میشناسید و استفاده میکنید، میتوانید با استفاده از آن کیف پول واریز نمایید.
+    # در غیر این صورت روی گزینه پرداخت کلیک کنید.
+    #
+    # 🟢️️️️️️پس از پرداخت اسکرین شات رسید خود را داخل بات بفرستید و منتظر باشید تا لینک شما ارسال شود(۵دقیقه تا ۱ ساعت)
+    #
+    # @top_netvpn 🔥"""
 
     text = """لطفا نحوه پرداخت خود را مشخص کنید."""
     bot.send_message(user_id, text, reply_markup=payment_keyboard)
@@ -208,7 +217,9 @@ def confirmation(message):
 
     admin_channel_id = "-1002034267204"
     with open(local_photo_path, 'rb') as photo_to_send:
-        bot.send_photo(admin_channel_id, photo_to_send, caption=f"User {user_id} Payment Confirmation for product {link_id}")
+        bot.send_photo(admin_channel_id, photo_to_send,
+                       caption=f"User {user_id} Payment Confirmation(AZWEB for product {link_id}")
+
 
 def extract_user_id_from_caption(caption):
     parts = [part.strip() for part in caption.split(' ')]
@@ -249,7 +260,6 @@ def handle_channel_post(message):
                 bot.send_message(user_id, "No valid link found for your order.")
         else:
             bot.send_message(user_id, f"No pending order found for {user_id}.")
-
 
 # @bot.callback_query_handler(func=lambda query: query.data == 'pay_btn')
 # def handle_video(query):
