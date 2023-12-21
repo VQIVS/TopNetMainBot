@@ -129,7 +129,7 @@ def invoice(query):
                       f"قیمت محصول به تومان: {selected_product['price']}\n\n" \
                       f"وضعیت سفارش: {order.status}\n\n" \
                       f"تعداد: {order.quantity}\n\n" \
- \
+
     bot.send_message(user_id, invoice_message, reply_markup=ConfirmOrder_keyboard)
 
 
@@ -218,7 +218,7 @@ def confirmation(message):
     admin_channel_id = "-1002034267204"
     with open(local_photo_path, 'rb') as photo_to_send:
         bot.send_photo(admin_channel_id, photo_to_send,
-                       caption=f"User {user_id} Payment Confirmation(AZWEB for product {link_id}")
+                       caption=f"User {user_id} Payment Confirmation(AZW) for product {link_id}")
 
 
 def extract_user_id_from_caption(caption):
