@@ -11,7 +11,7 @@ buttons_row2 = [
 ]
 buttons_row3 = [
     types.KeyboardButton('اضافه کردن نام کاربری'),
-    # types.KeyboardButton('درخواست حجم سفارشی')
+    types.KeyboardButton('درخواست حجم سفارشی')
 ]
 keyboard.add(*buttons_row1)
 keyboard.add(*buttons_row2)

@@ -72,11 +72,11 @@ def how_to_connect(message):
     bot.send_message(user_id, text)
 
 
-# @bot.message_handler(func=lambda message: message.text == "درخواست حجم سفارشی")
-# def message_chat(message):
-#     user_id = message.from_user.id
-#     text = """ برای درخواست ججم دلخواهتان به پشتیبانی پیام دهید:)"""
-#     bot.send_message(user_id, text)
+@bot.message_handler(func=lambda message: message.text == "درخواست حجم سفارشی")
+def message_chat(message):
+    user_id = message.from_user.id
+    text = """ برای درخواست ججم دلخواهتان به پشتیبانی پیام دهید:)"""
+    bot.send_message(user_id, text)
 
 
 @bot.callback_query_handler(func=lambda query: query.data in products_ids)
