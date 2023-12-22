@@ -40,7 +40,7 @@ payment_keyboard = types.InlineKeyboardMarkup(row_width=1)
 pay_button = types.InlineKeyboardButton('پرداخت با ترون', callback_data="pay", url="https://t.me/Feenonetbot")
 pay_card = types.InlineKeyboardButton('شماره کارت', callback_data="pay_cart")
 how_to_pay_button = types.InlineKeyboardButton('نحوه پرداخت', callback_data="pay_btn", url="https://t.me/PardakhtFinonet/3")
-payment_keyboard.add(pay_button, pay_card, how_to_pay_button)
+payment_keyboard.add(pay_card)
 
 
 
