@@ -11,24 +11,24 @@ buttons_row2 = [
 ]
 buttons_row3 = [
     types.KeyboardButton('اضافه کردن نام کاربری'),
-    types.KeyboardButton('درخواست حجم سفارشی')
+    # types.KeyboardButton('درخواست حجم سفارشی')
 ]
 keyboard.add(*buttons_row1)
 keyboard.add(*buttons_row2)
 keyboard.add(*buttons_row3)
 
 products_keyboard = types.InlineKeyboardMarkup(row_width=1)
-# product_1 = types.InlineKeyboardButton('2 کاربر |📆 مدت: 30 روز |‌🔵 30 گیگابایت |‌ 79 هزار تومان', callback_data='⭐️ گروه SILVER')
-# product_2 = types.InlineKeyboardButton('1 کاربر |📆 مدت: 30 روز |‌🔵 60 گیگابایت |‌ 119 هزار تومان', callback_data='⭐️ گروه GOLD-1')
-# product_3 = types.InlineKeyboardButton('2 کاربر |📆 مدت: 30 روز |‌🔵 60 گیگابایت |‌ 139 هزار تومان', callback_data='⭐️ گروه GOLD-2')
-# product_4 = types.InlineKeyboardButton('1 کاربر |📆 مدت: 30 روز |‌🔵 90 گیگابایت |‌ 159 هزار تومان', callback_data='⭐️ گروه PLATINUM-1')
-# product_5 = types.InlineKeyboardButton('3 کاربر |📆 مدت: 30 روز |‌🔵 90 گیگابایت |‌ 179 هزار تومان', callback_data='⭐️ گروه PLATINUM-2')
-# product_6 = types.InlineKeyboardButton('4 کاربر |📆 مدت: 30 روز |‌🔵 120 گیگابایت  |‌ 199 هزار تومان', callback_data='⭐️ گروه DIAMOND')
-product_1 = types.InlineKeyboardButton('📆 مدت: 30 روز |‌🔵 30 گیگابایت |‌ 24 هزار تومان', callback_data='⭐️ گروه SILVER')
-product_2 = types.InlineKeyboardButton('📆 مدت: 30 روز |‌🔵 60 گیگابایت |‌ 48 هزار تومان', callback_data='⭐️ گروه GOLD-1')
-product_3 = types.InlineKeyboardButton('📆 مدت: 30 روز |‌🔵 60 گیگابایت |‌ 72 هزار تومان', callback_data='⭐️ گروه GOLD-2')
-# products_keyboard.add(product_1, product_2, product_3, product_4, product_5, product_6)
-products_keyboard.add(product_1, product_2, product_3)
+product_1 = types.InlineKeyboardButton('2 کاربر |📆 مدت: 30 روز |‌🔵 30 گیگابایت |‌ 79 هزار تومان', callback_data='⭐️ گروه SILVER')
+product_2 = types.InlineKeyboardButton('1 کاربر |📆 مدت: 30 روز |‌🔵 60 گیگابایت |‌ 119 هزار تومان', callback_data='⭐️ گروه GOLD-1')
+product_3 = types.InlineKeyboardButton('2 کاربر |📆 مدت: 30 روز |‌🔵 60 گیگابایت |‌ 139 هزار تومان', callback_data='⭐️ گروه GOLD-2')
+product_4 = types.InlineKeyboardButton('1 کاربر |📆 مدت: 30 روز |‌🔵 90 گیگابایت |‌ 159 هزار تومان', callback_data='⭐️ گروه PLATINUM-1')
+product_5 = types.InlineKeyboardButton('3 کاربر |📆 مدت: 30 روز |‌🔵 90 گیگابایت |‌ 179 هزار تومان', callback_data='⭐️ گروه PLATINUM-2')
+product_6 = types.InlineKeyboardButton('4 کاربر |📆 مدت: 30 روز |‌🔵 120 گیگابایت  |‌ 199 هزار تومان', callback_data='⭐️ گروه DIAMOND')
+# product_1 = types.InlineKeyboardButton('📆 مدت: 30 روز |‌🔵 30 گیگابایت |‌ 24 هزار تومان', callback_data='⭐️ گروه SILVER')
+# product_2 = types.InlineKeyboardButton('📆 مدت: 30 روز |‌🔵 60 گیگابایت |‌ 48 هزار تومان', callback_data='⭐️ گروه GOLD-1')
+# product_3 = types.InlineKeyboardButton('📆 مدت: 30 روز |‌🔵 60 گیگابایت |‌ 72 هزار تومان', callback_data='⭐️ گروه GOLD-2')
+products_keyboard.add(product_1, product_2, product_3, product_4, product_5, product_6)
+# products_keyboard.add(product_1, product_2, product_3)
 
 
 ConfirmOrder_keyboard = types.InlineKeyboardMarkup(row_width=2)
