@@ -29,18 +29,18 @@ user_selected_option = {}
 def start(message):
     user_id = message.from_user.id
     bot.send_message(user_id, '⚡', reply_markup=keyboard)
-    text = "لطفا قبل از خرید با استفاده از دکمه اضافه کردن ایمیل , ایمیل خود را اضافه کنید و سپس اقدام به خرید بفرمایید"
+    text = "لطفا قبل از خرید با استفاده از دکمه اضافه کردن نام کاربری , نام کاربری خود را اضافه کنید و سپس اقدام به خرید بفرمایید"
     bot.send_message(user_id, text)
 
 
-@bot.message_handler(func=lambda message: message.text == 'اضافه کردن ایمیل')
+@bot.message_handler(func=lambda message: message.text == 'اضافه کردن نام کاربری')
 def add_email(message):
     user_id = message.from_user.id
     address = str(user_id) + '@telegram.com'
     user, created = User.objects.get_or_create(user_id=str(user_id))
     user.primary_email = address
     user.save()
-    bot.send_message(user_id, "لطفا ایمیل خود را به صورت صحیح وارد کنید")
+    bot.send_message(user_id, "لطفا نام کاربری خود را به صورت صحیح وارد کنید")
 
 
 @bot.message_handler(func=lambda message: message.text == '⭐️خرید سرویس')
@@ -91,7 +91,7 @@ def select_email(query):
     for email in email_addresses:
         button = types.InlineKeyboardButton(text=email.address, callback_data=f"email_{email.id}")
         keyboard_email.add(button)
-    bot.send_message(user_id, "ابتدا ایمیل خود را انتخاب کنید", reply_markup=keyboard_email)
+    bot.send_message(user_id, "ابتدا نام کاربری خود را انتخاب کنید", reply_markup=keyboard_email)
 
 
 @bot.callback_query_handler(func=lambda query: query.data.startswith("email_"))
@@ -139,12 +139,12 @@ def handler(query):
     bot.send_message(user_id, "درخواست شما لغو شد")
 
 
-def is_valid_email(email):
-    email_pattern = r'^[\w\.-]+@[\w\.-]+\.\w+$'
-    return re.match(email_pattern, email)
+def is_valid_username(username):
+    username_pattern = r'^[\w\.-]+$'
+    return re.match(username_pattern, username)
 
 
-@bot.message_handler(func=lambda message: is_valid_email(message.text))
+@bot.message_handler(func=lambda message: is_valid_username(message.text))
 def handler(message):
     user_id = message.chat.id
     email = message.text
@@ -157,7 +157,7 @@ def handler(message):
         message_save = f'کاربر {email} ثبت شد'
         bot.send_message(user_id, message_save)
     except DatabaseError:
-        message_unsaved = 'ایمیل تکراری یا اشتباه است.'
+        message_unsaved = 'نام کاربری تکراری یا اشتباه است.'
         bot.send_message(user_id, message_unsaved)
 
 
