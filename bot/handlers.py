@@ -72,7 +72,7 @@ def how_to_connect(message):
     bot.send_message(user_id, text)
 
 
-@bot.message_handler(func=lambda message: message.text == "درخواست حجم سفارشی")
+@bot.message_handler(func=lambda message: message.text == "درخواست عمده")
 def message_chat(message):
     user_id = message.from_user.id
     text = """ برای درخواست ججم دلخواهتان به پشتیبانی پیام دهید:)"""
